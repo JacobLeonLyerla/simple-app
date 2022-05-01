@@ -1,5 +1,6 @@
 package com.example.simple.data.remote
 
+import com.example.simple.data.remote.response.CategoriesDTO
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
@@ -11,19 +12,11 @@ interface DrinksService {
         const val BASE_URL = "https://www.thecocktaildb.com"
         const val QUERY_PARAM = "c"
 
-        fun drinksService(): DrinksService {
-            val retrofit: Retrofit = Retrofit.Builder()
-                .baseUrl(BASE_URL)
-                .addConverterFactory(
-                    GsonConverterFactory.create()
-                ).build()
-            return retrofit.create(DrinksService::class.java)
-        }
-
     }
 
     @GET("/api/json/v1/1/list.php")
-    suspend fun getAllCategories(@Query(QUERY_PARAM) type: String = "list")
+    suspend fun getAllCategories(@Query(QUERY_PARAM) type: String = "list"): CategoriesDTO
+
 
 }
 
